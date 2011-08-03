@@ -1,10 +1,19 @@
-#include <iostream>
-#include <message_driver/Dummy.hpp>
+#include <message_driver/MessageDriver.hpp>
 
-int main(int argc, char** argv)
+int main()
 {
-	DummyProject::DummyClass dummyClass;
-	dummyClass.welcome();
+	using namespace message_driver;
+	MessageDriver messageDriver;
+
+	Message message = messageDriver.createMessage();
+	
+	Config config;
+	config.uppercase = true;
+	MessageDriver messageUppercaseDriver(config);
+	Message uppercaseMessage = messageUppercaseDriver.createMessage();
+	
+	messageDriver.printMessage(message);
+	messageDriver.printMessage(uppercaseMessage);
 
 	return 0;
 }
